@@ -1,3 +1,5 @@
+import { api } from '../api/api';
+
 export const App = () => {
   return (
     <div
