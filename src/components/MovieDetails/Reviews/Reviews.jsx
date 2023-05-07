@@ -1,3 +1,4 @@
+import { Loader } from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from '../../../api/api';
@@ -27,7 +28,7 @@ export const Reviews = () => {
   return (
     <section>
       {error ? <div>An error occurred, please try again later...</div> : null}
-      {isLoading ? <div>Loading...</div> : null}
+      {isLoading ? <Loader/> : null}
 
       {movieReviews.results?.map(review => {
         return (

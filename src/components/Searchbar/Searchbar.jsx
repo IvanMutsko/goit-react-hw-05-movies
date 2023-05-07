@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   SearchbarBox,
@@ -33,3 +33,5 @@ export const Searchbar = ({ onSubmitForm }) => {
     </SearchbarBox>
   );
 };
+
+Searchbar.propTypes = { onSubmitForm: PropTypes.func.isRequired };

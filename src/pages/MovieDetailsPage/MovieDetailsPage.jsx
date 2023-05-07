@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useParams, Outlet, NavLink, useLocation } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { fetchMovieById } from '../../api/api';
 import { MovieDetails } from '../../components/MovieDetails/MovieDetails';
+import { StyledLink, ButtonWrap } from './MovieDetailsPage.styled';
+import { Loader } from 'components/Loader/Loader';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -32,22 +34,18 @@ const MovieDetailsPage = () => {
 
   return (
     <>
-      <NavLink to={backLinkHref}>Go back</NavLink>
+      <StyledLink to={backLinkHref}>Go back</StyledLink>
 
       {error ? <div>An error occurred, please try again later...</div> : null}
 
-      {isLoading ? <div>Loading...</div> : null}
+      {isLoading ? <Loader/> : null}
 
       <MovieDetails movieData={currentMovie} />
 
-      <ul>
-        <li>
-          <NavLink to="cast">Cast</NavLink>
-        </li>
-        <li>
-          <NavLink to="reviews">Reviews</NavLink>
-        </li>
-      </ul>
+      <ButtonWrap>
+        <StyledLink to="cast">Cast</StyledLink>
+        <StyledLink to="reviews">Reviews</StyledLink>
+      </ButtonWrap>
 
       <Outlet />
     </>

@@ -1,15 +1,14 @@
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { fetchMoviesByName } from '../../api/api';
-// import { Movies } from 'components/MovieList/MovieList';
+import { Movies } from 'components/MovieList/MovieList';
+import { Loader } from 'components/Loader/Loader';
 
-const Movies = () => {
+const MoviesPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -36,21 +35,9 @@ const Movies = () => {
 
       {error ? <div>An error occurred, please try again later...</div> : null}
 
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <ul>
-          {searchedMovies.map(movie => (
-            <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-                {movie.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {isLoading ? <Loader /> : <Movies movies={searchedMovies} />}
     </>
   );
 };
 
-export default Movies;
+export default MoviesPage;

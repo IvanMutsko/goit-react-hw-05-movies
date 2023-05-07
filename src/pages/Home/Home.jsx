@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { fetchTrendMovies } from '../../api/api';
 import { Title } from './Home.styled';
 import { Movies } from 'components/MovieList/MovieList';
+import { Loader } from 'components/Loader/Loader';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -30,11 +31,7 @@ const Home = () => {
       <Title>Trending last week</Title>
       {error ? <div>An error occurred, please try again later...</div> : null}
 
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <Movies trendingMovies={trendingMovies} />
-      )}
+      {isLoading ? <Loader/> : <Movies movies={trendingMovies} />}
     </>
   );
 };

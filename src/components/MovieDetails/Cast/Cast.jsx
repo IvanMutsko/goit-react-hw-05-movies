@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ActorWrap, Section } from './Cast.styled';
 import { fetchMovieCredits } from '../../../api/api';
+import { Loader } from 'components/Loader/Loader';
 
 export const Cast = () => {
   const { movieId } = useParams();
@@ -25,32 +27,30 @@ export const Cast = () => {
   }, [movieId]);
 
   return (
-    <section>
+    <Section>
       {error ? <div>An error occurred, please try again later...</div> : null}
 
-      {isLoading ? <div>Loading...</div> : null}
+      {isLoading ? <Loader /> : null}
 
       {movieCredits.cast?.map(actor => {
         return (
-          <div key={actor.credit_id}>
+          <ActorWrap key={actor.credit_id}>
             {actor.profile_path ? (
               <img
                 src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
                 alt={`${actor.name}`}
-                width="150"
               />
             ) : (
               <img
                 src={`https://via.placeholder.com/200x300?text=No+Image`}
                 alt={`${actor.name} profile`}
-                width="150"
               />
             )}
             <h3> {actor.name}</h3>
             <p>Character: {actor.character}</p>
-          </div>
+          </ActorWrap>
         );
       })}
-    </section>
+    </Section>
   );
 };
