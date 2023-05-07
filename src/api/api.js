@@ -14,17 +14,10 @@ export const fetchTrendMovies = async () => {
   }
 };
 
-export const fetchSearchMovies = async searchQuery => {
-  const params = {
-    language: 'en-US',
-    page: 1,
-    include_adult: false,
-    query: searchQuery,
-  };
-
+export const fetchMoviesByName = async searchQuery => {
   try {
     const { data } = await axios.get(
-      `${API_URL}/search/movie?api_key=${API_KEY}&${params}`
+      `${API_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=1&include_adult=false`
     );
 
     return data;
