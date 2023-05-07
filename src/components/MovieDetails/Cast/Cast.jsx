@@ -4,7 +4,7 @@ import { ActorWrap, Section } from './Cast.styled';
 import { fetchMovieCredits } from '../../../api/api';
 import { Loader } from 'components/Loader/Loader';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [movieCredits, setMovieCredits] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -54,3 +54,5 @@ export const Cast = () => {
     </Section>
   );
 };
+
+export default Cast;

@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import { DetailsWrap, DetailsSubwrap } from './MovieDetails.styled';
 
 export const MovieDetails = ({ movieData }) => {
-  const { genres, overview, vote_average, poster_path, title } = movieData;
+ 
+  const { poster_path, title, vote_average, overview, genres } = movieData;
 
   const posterURL = poster_path
     ? `https://image.tmdb.org/t/p/w400/${poster_path}`

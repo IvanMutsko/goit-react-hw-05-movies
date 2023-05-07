@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from '../../../api/api';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [movieReviews, setMovieReviews] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +28,7 @@ export const Reviews = () => {
   return (
     <section>
       {error ? <div>An error occurred, please try again later...</div> : null}
-      {isLoading ? <Loader/> : null}
+      {isLoading ? <Loader /> : null}
 
       {movieReviews.results?.map(review => {
         return (
@@ -41,3 +41,5 @@ export const Reviews = () => {
     </section>
   );
 };
+
+export default Reviews;

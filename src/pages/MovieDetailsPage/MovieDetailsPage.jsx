@@ -21,6 +21,7 @@ const MovieDetailsPage = () => {
         setIsLoading(true);
 
         const fetchedMovie = await fetchMovieById(movieId);
+
         setCurrentMovie(fetchedMovie);
       } catch (error) {
         setError(true);
@@ -38,9 +39,7 @@ const MovieDetailsPage = () => {
 
       {error ? <div>An error occurred, please try again later...</div> : null}
 
-      {isLoading ? <Loader/> : null}
-
-      <MovieDetails movieData={currentMovie} />
+      {isLoading ? <Loader /> : <MovieDetails movieData={currentMovie} />}
 
       <ButtonWrap>
         <StyledLink to="cast">Cast</StyledLink>
