@@ -1,26 +1,40 @@
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { fetchTrendMovies } from '../../api/api';
-import { Movie, MovieList, Title } from './Home.styled';
+import { Title } from './Home.styled';
+import { Movies } from 'components/MovieList/MovieList';
 
 const Home = () => {
-  const fetchMovies = async () => {
-    try {
-      const fetchedMovies = await fetchTrendMovies();
-      console.log(fetchedMovies);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        setError(false);
+        setIsLoading(true);
+        const fetchedMovies = await fetchTrendMovies();
+        setTrendingMovies(fetchedMovies.results);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchMovies();
   }, []);
   return (
     <>
       <Title>Trending last week</Title>
-      <MovieList>
-        <Movie>dasasd</Movie>
-      </MovieList>
+      {error ? <div>An error occurred, please try again later...</div> : null}
+
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <Movies trendingMovies={trendingMovies} />
+      )}
     </>
   );
 };
