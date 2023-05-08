@@ -4,6 +4,7 @@ import { fetchMovieById } from '../../api/api';
 import { MovieDetails } from '../../components/MovieDetails/MovieDetails';
 import { StyledLink, ButtonWrap } from './MovieDetailsPage.styled';
 import { Loader } from 'components/Loader/Loader';
+import { useRef } from 'react';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -12,7 +13,7 @@ const MovieDetailsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const backLinkHref = location.state?.from ?? '/';
+  const backLinkHref = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     const fetchMovie = async movieId => {
@@ -35,7 +36,7 @@ const MovieDetailsPage = () => {
 
   return (
     <>
-      <StyledLink to={backLinkHref}>Go back</StyledLink>
+      <StyledLink to={backLinkHref.current}>Go back</StyledLink>
 
       {error ? <div>An error occurred, please try again later...</div> : null}
 
